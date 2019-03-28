@@ -1,6 +1,7 @@
 package Experiment1;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -18,10 +19,20 @@ import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.RunningJob;
 
 public class Step1 {
+	public static Text transformTextToUTF8(Text text, String encoding) {
+		String value = null;
+		try {
+		value = new String(text.getBytes(), 0, text.getLength(), encoding);
+		} catch (UnsupportedEncodingException e) {
+		e.printStackTrace();}
+		return new Text(value);
+	}
+	
 	public static class step1StandardMapper extends Mapper<Object, Text, Text, Text>{
 		public void map(Object key,Text value,Context context) throws IOException, InterruptedException{
+			value = transformTextToUTF8(value,"GBK");
 			String[] splitResult = value.toString().split("\\|");//特殊字符
-			System.out.printf(Arrays.toString(splitResult));
+			System.out.println(value.toString());
 			context.write(new Text(splitResult[10]), value);//<"doctor",整条信息>
 		}
 	}
@@ -31,6 +42,7 @@ public class Step1 {
 			ArrayList<String> infoList = new  ArrayList<String>();
 			System.out.printf("key:%s\n",key.toString());
 			for(Text value:values) {
+				//value = transformTextToUTF8(value,"GBK");
 				infoList.add(value.toString());
 			}
 			//进行抽样
@@ -40,6 +52,7 @@ public class Step1 {
 			int segments = personSum/sampleSum;
 			//按照系统抽样的方法，抽取指定的人数
 			for(int i = 0;i<infoList.size();i = i+segments) {
+				System.out.println(infoList.get(i));
 				context.write(new Text(infoList.get(i)),new Text());
 			}
 			

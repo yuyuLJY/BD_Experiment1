@@ -11,12 +11,21 @@ public class Main {
 	public static final String HDFS = "hdfs://192.168.126.132:9000";
 	public static void main(String[] args) throws ClassNotFoundException, IOException, InterruptedException {
 		Map<String,String> path = new HashMap<String,String>();
-		path.put("Step1Input", HDFS+"/BigDataAnaly/experiment1/Rawdata/small_data.txt");
-		path.put("Step1Output", HDFS+"/BigDataAnaly/experiment1/D_Sample/5");
+		path.put("Step1Input", HDFS+"/BigDataAnaly/experiment1/Rawdata/large_data.txt");
+		path.put("Step1Output", HDFS+"/BigDataAnaly/experiment1/D_Sample");
+		//D_Sample/3是不进行encoding转换的
+		
+		path.put("Step2Input", HDFS+"/BigDataAnaly/experiment1/D_Sample");
+		path.put("Step2Output", HDFS+"/BigDataAnaly/experiment1/D_Filtered");
+		
+		path.put("Step3Input", HDFS+"/BigDataAnaly/experiment1/D_Filtered");
+		path.put("Step3Output", HDFS+"/BigDataAnaly/experiment1/D_Standard/1");
 		//TODO 分层抽样
-		Step1.run(path);
-		//TODO 
-		//TODO
+		//Step1.run(path);
+		//TODO 过滤掉奇异值
+		//Step2.run(path);
+		//TODO 归一化和标准化
+		Step3.run(path);
 		//TODO
 		
 	}
