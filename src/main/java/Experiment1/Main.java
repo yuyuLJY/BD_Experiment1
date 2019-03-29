@@ -19,7 +19,7 @@ public class Main {
 		path.put("Step2Output", HDFS+"/BigDataAnaly/experiment1/D_Filtered");
 		
 		path.put("Step3Input", HDFS+"/BigDataAnaly/experiment1/D_Filtered");
-		path.put("Step3Output", HDFS+"/BigDataAnaly/experiment1/D_Standard/1");
+		path.put("Step3Output", HDFS+"/BigDataAnaly/experiment1/D_Standard");
 		//TODO 分层抽样
 		//Step1.run(path);
 		//TODO 过滤掉奇异值
@@ -27,7 +27,6 @@ public class Main {
 		//TODO 归一化和标准化
 		Step3.run(path);
 		//TODO
-		
 	}
 	
     public static JobConf config() {

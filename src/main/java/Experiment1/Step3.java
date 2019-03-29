@@ -75,6 +75,19 @@ public class Step3 {
 			  for(Text value:values) {
 				  
 			  String[] saveSplitResult = value.toString().split("\\|");
+			  //TODO 华摄氏度数和摄氏度 组5
+				if(saveSplitResult[5].contains("℃")) {
+					String REGEX3 = "\\d+\\.\\d+";
+					Pattern pattern3 = Pattern.compile(REGEX3);
+					Matcher matcher3 = pattern3.matcher(saveSplitResult[5]);
+					while(matcher3.find()) {
+						double Fahrenheit = 1.8 * Double.valueOf(matcher3.group(0)) + 32;
+						String newTem = String.valueOf(Fahrenheit)+"℉";
+						System.out.println(newTem);
+						saveSplitResult[5] = newTem;
+					}	
+				}
+			  
 			  //TODO 对日期进行处理 4 8
 			  String REGEX1 = "(\\d+)-(\\d+)-(\\d+)";
 			  String REGEX2 = "(\\d+)/(\\d+)/(\\d+)";
@@ -86,7 +99,7 @@ public class Step3 {
 							String[] aList = saveSplitResult[i].split("-"); 
 							String a1 = month.get(aList[1]);
 							String newA = a1+" "+aList[2]+", "+aList[0];
-							
+							saveSplitResult[i] = newA;
 							System.out.println("newA："+newA);
 					  }
 					  Matcher matcher2 = pattern2.matcher(saveSplitResult[i]);
@@ -94,9 +107,9 @@ public class Step3 {
 							String[] bList = saveSplitResult[i].split("/");
 							String b1 = month.get(bList[1]);
 							String newB = b1+" "+bList[2]+", "+bList[0];
+							saveSplitResult[i] = newB;
 							System.out.println("newB："+newB);
 					  }
-					  
 				  }
 
 				  //TODO 处理rating映射范围为[0,1]

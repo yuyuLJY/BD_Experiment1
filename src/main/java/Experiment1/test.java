@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class test {
 	public static void main(String[] args) {
 		//2018-03-21、2018/03/21、March 21, 2019
+		/*
 		Map<String,String> month = new HashMap<String,String>(); 
 		month.put("01", "January");
 		month.put("02", "February");
@@ -46,5 +47,29 @@ public class test {
 		}
 		System.out.println("a: "+matcher1.matches());
 		System.out.println("b: "+matcher2.matches());
-	}
+	*/
+	//对摄氏度转换
+		/*
+		String tem = "37.5℃";
+		if(tem.contains("℃")) {
+			String REGEX3 = "\\d+\\.\\d+";
+			Pattern pattern3 = Pattern.compile(REGEX3);
+			Matcher matcher3 = pattern3.matcher(tem);
+			while(matcher3.find()) {
+				for(int j = 0; j <= matcher3.groupCount(); j++)
+					System.out.println(matcher3.group(0));
+			}
+		}*/
+		String tem = "37.5℃";
+		if(tem.contains("℃")) {
+			String REGEX3 = "\\d+\\.\\d+";
+			Pattern pattern3 = Pattern.compile(REGEX3);
+			Matcher matcher3 = pattern3.matcher(tem);
+			while(matcher3.find()) {
+				double Fahrenheit = 1.8 * Double.valueOf(matcher3.group(0)) + 32;
+				String newTem = String.valueOf(Fahrenheit)+"℉";
+				System.out.println(newTem);
+			}	
+		}
+}
 }
