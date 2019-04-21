@@ -20,13 +20,24 @@ public class Main {
 		
 		path.put("Step3Input", HDFS+"/BigDataAnaly/experiment1/D_Filtered");
 		path.put("Step3Output", HDFS+"/BigDataAnaly/experiment1/D_Standard");
+		
+		path.put("Step4_1Input", HDFS+"/BigDataAnaly/experiment1/D_Filtered");
+		path.put("Step4_1Output", HDFS+"/BigDataAnaly/experiment1/D_Preprocessed/Rating1/8");
+		
+		path.put("Step4_2Input", HDFS+"/BigDataAnaly/experiment1/D_Filtered");
+		path.put("Step4_2Output", HDFS+"/BigDataAnaly/experiment1/D_Preprocessed/Rating2/6");
 		//TODO 分层抽样
 		//Step1.run(path);
 		//TODO 过滤掉奇异值
 		//Step2.run(path);
 		//TODO 归一化和标准化
-		Step3.run(path);
-		//TODO
+		//Step3.run(path);
+		//TODO 找出id
+		//Step4_1.run(path);
+		
+		//TODO 求出平均值
+		Step4_2.run(path);
+		
 	}
 	
     public static JobConf config() {
